@@ -1,0 +1,45 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #111;
+  color: #fff;
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+.tetris-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(20, 30px);
+  background-color: #222;
+  border: 2px solid #555;
+}
+
+#grid div {
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+  border: 1px solid #333;
+}
+
+.tetromino {
+  background-color: cyan;
+}
+
+.info {
+  text-align: left;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
