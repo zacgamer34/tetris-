@@ -193,10 +193,21 @@ document.addEventListener('DOMContentLoaded', () => {
         row.forEach(index => {
           squares[index].classList.remove('taken', 'tetromino');
         });
-        const removed = squares.splice(i, width);
-        squares.push(...removed);
-        // re-render DOM order
-        squares.forEach(cell => grid.appendChild(cell));
+        // Hacer que las fichas de arriba caigan
+        const squaresRemoved = row;
+        for (let y = i; y >= 0; y -= width) {
+          for (let x = 0; x < width; x++) {
+            const currentIndex = y + x;
+            const aboveIndex = currentIndex - width;
+            if (aboveIndex >= 0) {
+              const hasBlock = squares[aboveIndex].classList.contains('tetromino');
+              const isTaken = squares[aboveIndex].classList.contains('taken');
+              squares[currentIndex].classList.toggle('tetromino', hasBlock);
+              squares[currentIndex].classList.toggle('taken', isTaken);
+              squares[aboveIndex].classList.remove('tetromino', 'taken');
+            }
+          }
+        }
       }
     }
   }
@@ -226,8 +237,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Nuevo: restart button (asume id="restart-button" en el index)
-  const restartBtn = document.getElementById('restart-button');
+  // Nuevo: restart button
+  const restartBtn = document.getElementById('restart_button');
 
   function rebuildSquaresArray() {
     const fresh = Array.from(document.querySelectorAll('#grid div'));
